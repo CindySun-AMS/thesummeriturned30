@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Summer I Turned 30</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* paper & ink */
+  --paper:#FBF6EC; --paper-2:#F7EFE1; --shore:#FFF8F0; --ivory:#FFFCF7;
+  --ink:#2E2A26; --ink-2:#6B6259; --hair:rgba(46,42,38,.16); --hair-2:rgba(46,42,38,.09);
+  /* riviera */
+  --navy:#1B3A63; --azure:#5E92C6; --azure-pale:#CBDDEE; --lemon:#DFA51E;
+  --terracotta:#C1552A; --olive:#5F8A4B;
+  /* pacific */
+  --teal:#1C6F68; --teal-pale:#C4DFD9; --coral:#D2564F; --papaya:#E07C3C;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:'Karla',sans-serif;color:var(--ink);background:var(--paper);
+  -webkit-font-smoothing:antialiased;overflow-x:hidden}
+.sprite{position:absolute;width:0;height:0;overflow:hidden}
+svg{display:block}
+::selection{background:var(--azure-pale)}
+
+/* ---------- navigation ---------- */
+.nav{position:sticky;top:0;z-index:60;background:rgba(251,246,236,.94);
+  -webkit-backdrop-filter:saturate(1.4) blur(10px);backdrop-filter:saturate(1.4) blur(10px);
+  border-bottom:1px solid var(--hair)}
+.nav-in{display:flex;max-width:700px;margin:0 auto}
+.tabbtn{flex:1;padding:17px 6px 15px;margin-bottom:-1px;background:none;border:0;
+  border-bottom:1px solid transparent;cursor:pointer;font-family:'Karla',sans-serif;
+  font-size:.58rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-2);
+  white-space:nowrap;transition:color .2s,border-color .2s;-webkit-tap-highlight-color:transparent}
+@media(min-width:460px){.tabbtn{font-size:.64rem;letter-spacing:.24em}}
+.tabbtn.active{color:var(--ink);border-bottom-color:var(--terracotta)}
+.view{display:none}
+.view.active{display:block}
+
+/* ---------- scaffolding ---------- */
+.sec{position:relative;overflow:hidden}
+.wrap{position:relative;z-index:2;max-width:660px;margin:0 auto;padding:0 26px}
+@media(min-width:520px){.wrap{padding:0 40px}}
+/* decorations are pinned to the text column, not the viewport */
+.stage{position:absolute;top:0;right:0;bottom:0;left:0;max-width:712px;margin-inline:auto;
+  pointer-events:none;z-index:1}
+.deco{position:absolute;height:auto;pointer-events:none;z-index:1}
+
+/* trim bands: awning stripes for Italy, sand dots for the Pacific */
+.trim{height:11px;background:repeating-linear-gradient(90deg,var(--azure-pale) 0 8px,transparent 8px 16px)}
+.trim.pacific{height:13px;background-image:radial-gradient(circle,rgba(28,111,104,.3) 1.5px,transparent 2px);
+  background-size:13px 13px}
+
+/* ---------- type ---------- */
+.label{font-size:.6rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-2)}
+.display{font-family:'Fraunces',serif;font-style:italic;font-weight:400;line-height:1;letter-spacing:-.025em}
+.lede{font-family:'Fraunces',serif;font-style:italic;font-weight:400;font-size:1.02rem;
+  line-height:1.62;color:var(--ink-2);max-width:29em}
+.centred{text-align:center;margin-left:auto;margin-right:auto}
+
+/* ---------- opening ---------- */
+.hero{position:relative;overflow:hidden;text-align:center;
+  background:linear-gradient(180deg,#FDFAF3 0%,var(--paper) 52%,var(--paper-2) 100%)}
+.hero .wrap{padding-top:58px}
+.hero h1{margin-top:20px;font-family:'Fraunces',serif;font-style:italic;font-weight:400;
+  font-size:clamp(2.6rem,13.5vw,4.1rem);line-height:.94;letter-spacing:-.03em;color:var(--navy)}
+.hero h1 .pre{display:block;font-family:'Karla',sans-serif;font-style:normal;font-weight:700;
+  font-size:.2em;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-2);margin-bottom:1.4em}
+.dateline{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:26px;
+  font-size:.62rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--terracotta)}
+.dateline::before,.dateline::after{content:'';height:1px;width:clamp(20px,9vw,46px);background:var(--hair)}
+
+/* still life: motifs standing on a single rule */
+.plate{display:flex;align-items:flex-end;justify-content:center;gap:3%;
+  border-bottom:1px solid var(--hair)}
+.plate svg{height:auto;flex:0 0 auto}
+.hero .plate{margin-top:44px}
+
+/* ---------- section headers ---------- */
+.head{padding-top:52px}
+.head .rule{display:flex;align-items:baseline;justify-content:space-between;gap:14px;
+  border-top:1px solid rgba(46,42,38,.5);padding-top:12px}
+.head h2{margin-top:16px;font-size:clamp(2.5rem,12.5vw,3.7rem)}
+.head .lede{margin-top:16px}
+.subhead{padding:46px 0 0;text-align:center}
+.subhead h1{margin-top:14px;font-size:clamp(2.1rem,9.5vw,3rem);line-height:1.04}
+
+/* ---------- rows: one 58px gutter for every list ---------- */
+.rows{list-style:none;margin-top:34px}
+.row{display:grid;grid-template-columns:58px 1fr;gap:18px;padding:22px 0;border-top:1px solid var(--hair-2)}
+.row:first-child{border-top:0;padding-top:6px}
+@media(min-width:520px){.row{grid-template-columns:76px 1fr;gap:26px}}
+.when{font-size:.64rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--ink-2);padding-top:.5em;font-variant-numeric:tabular-nums}
+.num{font-family:'Fraunces',serif;font-style:italic;font-weight:400;font-size:1.16rem;
+  color:var(--ink-2);opacity:.7;padding-top:.06em}
+.row .mk{height:auto;margin-top:2px}
+.row h3{font-family:'Fraunces',serif;font-weight:500;font-size:1.14rem;line-height:1.25;letter-spacing:-.012em}
+.venue{margin-top:5px;font-family:'Fraunces',serif;font-style:italic;font-size:.96rem;
+  line-height:1.4;color:var(--ink-2)}
+.row p{margin-top:8px;font-size:.9rem;line-height:1.66;color:var(--ink-2);max-width:33em}
+.meta{margin-top:10px;font-size:.55rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-2);opacity:.72}
+
+/* ---------- map links ---------- */
+.map{display:inline-flex;align-items:center;gap:7px;margin-top:14px;padding-bottom:4px;
+  font-family:'Karla',sans-serif;font-size:.6rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--terracotta);text-decoration:none;border-bottom:1px solid rgba(193,85,42,.4);
+  transition:border-color .2s}
+.map:hover{border-bottom-color:var(--terracotta)}
+.pacific-type .map{color:var(--coral);border-bottom-color:rgba(210,86,79,.4)}
+.pacific-type .map:hover{border-bottom-color:var(--coral)}
+
+/* ---------- cross links ---------- */
+.jump{display:grid;grid-template-columns:58px 1fr auto;align-items:center;gap:18px;width:100%;
+  margin-top:38px;padding:20px 2px;text-align:left;cursor:pointer;background:none;color:inherit;
+  border:0;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);
+  font-family:inherit;-webkit-tap-highlight-color:transparent;transition:background .2s}
+.jump:hover{background:rgba(255,255,255,.5)}
+@media(min-width:520px){.jump{grid-template-columns:76px 1fr auto;gap:26px}}
+.jump svg.mk{height:auto}
+.jump .jl{display:block;font-size:.58rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--terracotta);margin-bottom:7px}
+.jump .jh{display:block;font-family:'Fraunces',serif;font-style:italic;font-size:1.04rem;line-height:1.35}
+.jump .arw{color:var(--terracotta)}
+.jump.back{grid-template-columns:auto 1fr;justify-items:start}
+.jump.back .jh{font-size:.96rem}
+
+/* ---------- day one: the riviera ---------- */
+.riviera{background:linear-gradient(180deg,var(--paper-2) 0%,#FCF6EA 42%,var(--paper-2) 100%)}
+.riviera .head .rule{border-top-color:rgba(27,58,99,.5)}
+.riviera h2,.riviera h3{color:var(--navy)}
+.riviera .head .rule .label{color:var(--terracotta)}
+.riviera .head .rule .label+.label{color:var(--ink-2)}
+
+/* ---------- the interlude: sun over the horizon ---------- */
+.interlude{position:relative;overflow:hidden;padding-top:56px;
+  background:linear-gradient(180deg,rgba(255,248,240,0) 34%,rgba(255,248,240,.96) 100%),
+             linear-gradient(102deg,var(--paper-2) 0%,#FAEBDA 46%,var(--shore) 100%)}
+.interlude .label{color:var(--papaya)}
+.interlude .lede{margin-top:14px;max-width:22em}
+.horizon{display:flex;align-items:flex-end;justify-content:center;gap:2.5%;margin-top:38px;
+  border-bottom:1px solid var(--hair)}
+.horizon svg{height:auto;flex:0 0 auto}
+.sunset{flex:0 0 auto;width:26%;aspect-ratio:2/1;overflow:hidden;line-height:0}
+.sunset svg{width:100%;opacity:.8}
+
+/* ---------- day two: the pacific ---------- */
+.pacific{background:linear-gradient(180deg,var(--shore) 0%,#FEF3E9 46%,#FBE9DF 100%)}
+.pacific-type .head .rule{border-top-color:rgba(28,111,104,.5)}
+.pacific-type h2,.pacific-type h3{color:var(--teal)}
+.pacific-type .head .rule .label{color:var(--coral)}
+.pacific-type .head .rule .label+.label{color:var(--ink-2)}
+.pacific-type .jump .jl,.pacific-type .jump .arw{color:var(--coral)}
+
+/* ---------- notes ---------- */
+.note{margin-top:38px;padding:22px 0;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
+.note p{font-family:'Fraunces',serif;font-style:italic;font-size:.98rem;line-height:1.6;color:var(--ink-2)}
+
+/* ---------- closing ---------- */
+footer{position:relative;overflow:hidden;text-align:center;padding:56px 26px 62px;
+  background:var(--navy);color:#F8F0E3}
+footer .frow{display:flex;align-items:flex-end;justify-content:center;gap:16px;
+  width:56%;max-width:210px;margin:0 auto 30px}
+footer .frow svg{height:auto;flex:0 0 auto}
+footer .label{color:rgba(248,240,227,.62)}
+footer h2{margin-top:14px;font-size:2.5rem;color:#F8F0E3}
+footer .fine{margin-top:20px;font-size:.6rem;font-weight:700;letter-spacing:.2em;
+  text-transform:uppercase;color:rgba(248,240,227,.5)}
+</style>
+</head>
+<body>
+<svg class="sprite" aria-hidden="true" focusable="false">
+<defs>
+  <linearGradient id="gLemon" x1="0" y1="0" x2=".85" y2="1">
+    <stop offset="0" stop-color="#FBE494"/><stop offset=".55" stop-color="#F2C63F"/><stop offset="1" stop-color="#DFA51E"/></linearGradient>
+  <linearGradient id="gLeafI" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#7CA35C"/><stop offset="1" stop-color="#456B36"/></linearGradient>
+  <linearGradient id="gVespa" x1=".1" y1="0" x2=".9" y2="1">
+    <stop offset="0" stop-color="#C4DBF0"/><stop offset=".5" stop-color="#A2C6E6"/><stop offset="1" stop-color="#7FAED9"/></linearGradient>
+  <linearGradient id="gSpritz" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#F08A3C"/><stop offset="1" stop-color="#D8471F"/></linearGradient>
+  <linearGradient id="gGlass" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#EAF3FA"/><stop offset="1" stop-color="#CFE1EF"/></linearGradient>
+  <radialGradient id="gBloom" cx=".4" cy=".35" r=".75">
+    <stop offset="0" stop-color="#F9CBD6"/><stop offset="1" stop-color="#E68DA6"/></radialGradient>
+</defs>
+
+<symbol id="m-lemon" viewBox="0 0 132 100">
+  <path d="M62 16C74 2 96-4 114 2c-2 17-20 27-40 22Z" fill="url(#gLeafI)"/>
+  <path d="M66 14c12-5 28-9 40-10" stroke="#3E6231" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+  <path d="M9 53C7 30 30 12 60 13c30 1 60 15 61 37 1 22-25 39-59 38C31 87 11 75 9 53Z" fill="url(#gLemon)"/>
+  <path d="M4 50c1-5 8-8 13-6 4 2 4 7 1 9-4 3-15 2-14-3Z" fill="#DFA51E"/>
+  <path d="M119 43c6-1 10 3 9 7-1 5-8 7-12 4" fill="#DFA51E"/>
+  <path d="M27 40C36 27 53 20 71 22" stroke="#FDF1C2" stroke-width="8" stroke-linecap="round" fill="none" opacity=".72"/>
+</symbol>
+
+<symbol id="m-lemon-half" viewBox="0 0 100 100">
+  <circle cx="50" cy="50" r="45" fill="#EFCF6E"/>
+  <circle cx="50" cy="50" r="38" fill="#FDF7DE"/>
+  <g fill="#F5DA93">
+    <g transform="rotate(0 50 50)"><path d="M50 50 63 19a34 34 0 0 0-26 0Z"/></g>
+    <g transform="rotate(45 50 50)"><path d="M50 50 63 19a34 34 0 0 0-26 0Z"/></g>
+    <g transform="rotate(90 50 50)"><path d="M50 50 63 19a34 34 0 0 0-26 0Z"/></g>
+    <g transform="rotate(135 50 50)"><path d="M50 50 63 19a34 34 0 0 0-26 0Z"/></g>
+    <g transform="rotate(180 50 50)"><path d="M50 50 63 19a34 34 0 0 0-26 0Z"/></g>
+    <g transform="rotate(225 50 50)"><path d="M50 50 63 19a34 34 0 0 0-26 0Z"/></g>
+    <g transform="rotate(270 50 50)"><path d="M50 50 63 19a34 34 0 0 0-26 0Z"/></g>
+    <g transform="rotate(315 50 50)"><path d="M50 50 63 19a34 34 0 0 0-26 0Z"/></g>
+  </g>
+  <circle cx="50" cy="50" r="5.5" fill="#FCF3D2"/>
+</symbol>
+
+<symbol id="m-umbrella" viewBox="0 0 150 152">
+  <clipPath id="cUmb">
+    <path d="M6 68c0-38 30-62 69-62s69 24 69 62c-7.7 10-15.3 10-23 0-7.7 10-15.3 10-23 0-7.7 10-15.3 10-23 0-7.7 10-15.3 10-23 0-7.7 10-15.3 10-23 0Z"/>
+  </clipPath>
+  <g clip-path="url(#cUmb)">
+    <rect x="0" y="0" width="150" height="80" fill="#FBF6E9"/>
+    <path d="M75 4 3 80h26Z" fill="#7FAED9"/>
+    <path d="M75 4 51 80h26Z" fill="#7FAED9"/>
+    <path d="M75 4 99 80h26Z" fill="#7FAED9"/>
+    <path d="M75 4 147 80h-26Z" fill="#5E92C6" opacity=".85"/>
+  </g>
+  <rect x="72" y="60" width="6" height="90" rx="3" fill="#C89A62"/>
+  <circle cx="75" cy="6" r="4.5" fill="#5E92C6"/>
+</symbol>
+
+<symbol id="m-vespa" viewBox="0 0 210 142">
+  <circle cx="52" cy="104" r="25" fill="#31383F"/><circle cx="52" cy="104" r="11" fill="#E4EDF4"/><circle cx="52" cy="104" r="4" fill="#B9C8D4"/>
+  <circle cx="167" cy="104" r="25" fill="#31383F"/><circle cx="167" cy="104" r="11" fill="#E4EDF4"/><circle cx="167" cy="104" r="4" fill="#B9C8D4"/>
+  <path d="M147 106c-3-20 6-32 21-34 14-2 22 7 22 19" stroke="#B7D3EC" stroke-width="11" fill="none" stroke-linecap="round"/>
+  <path d="M86 103h54l8-11H94Z" fill="#7FAED9"/>
+  <path d="M19 103C13 70 28 46 59 40c30-6 58 8 64 34 4 18-4 29-16 29H86c0-18-14-31-32-29-16 2-27 13-29 29Z" fill="url(#gVespa)"/>
+  <path d="M138 106c-6-25-4-45 7-62 6-9 18-13 26-9 8 5 10 15 6 27l-10 41c-2 6-8 8-16 8Z" fill="url(#gVespa)"/>
+  <g stroke="#1B3A63" stroke-width="3.4" stroke-linecap="round" opacity=".75">
+    <path d="M33 74h20"/><path d="M31 82h22"/><path d="M33 90h20"/>
+  </g>
+  <path d="M52 41c5-12 26-18 44-13 10 3 11 12 3 17l-42 6c-6 1-8-4-5-10Z" fill="#1B3A63"/>
+  <path d="M167 32c-6-8-15-12-24-11" stroke="#1B3A63" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <circle cx="141" cy="21" r="5.5" fill="#1B3A63"/>
+  <circle cx="180" cy="43" r="10" fill="#FBF6E9"/><circle cx="177" cy="40" r="3.4" fill="#fff"/>
+  <path d="M141 21l-3-13" stroke="#1B3A63" stroke-width="3.4" stroke-linecap="round"/><circle cx="137" cy="6" r="5" fill="#1B3A63"/>
+</symbol>
+
+<symbol id="m-spritz" viewBox="0 0 100 148">
+  <path d="M17 20c0 34 13 56 33 60 20-4 33-26 33-60Z" fill="url(#gSpritz)" opacity=".9"/>
+  <ellipse cx="50" cy="20" rx="33" ry="7.5" fill="#E9F2F9" opacity=".9"/>
+  <path d="M17 20c0 34 13 56 33 60 20-4 33-26 33-60" fill="none" stroke="url(#gGlass)" stroke-width="3"/>
+  <rect x="46" y="79" width="8" height="46" fill="url(#gGlass)"/>
+  <ellipse cx="50" cy="127" rx="25" ry="7" fill="url(#gGlass)"/>
+  <rect x="30" y="32" width="15" height="15" rx="4" fill="#fff" opacity=".34" transform="rotate(-14 37 39)"/>
+  <rect x="52" y="44" width="13" height="13" rx="4" fill="#fff" opacity=".28" transform="rotate(12 58 50)"/>
+  <g transform="translate(76 14)">
+    <circle r="15" fill="#EFA23C"/><circle r="11" fill="#F8CE87"/>
+    <g stroke="#EFA23C" stroke-width="1.8"><path d="M0-11V11"/><path d="M-9.5-5.5 9.5 5.5"/><path d="M-9.5 5.5 9.5-5.5"/></g>
+  </g>
+</symbol>
+
+<symbol id="m-bottle" viewBox="0 0 60 172">
+  <path d="M23 8h14v32l10 19c3 6 4 12 4 18v79c0 9-4 13-14 13H23c-10 0-14-4-14-13V77c0-6 1-12 4-18l10-19Z" fill="#1B3A63"/>
+  <rect x="22" y="0" width="16" height="9" rx="3" fill="#E4692B"/>
+  <path d="M9 40h0" fill="none"/>
+  <rect x="9" y="98" width="42" height="34" rx="4" fill="#FBF6E9"/>
+  <path d="M22 115c4-6 12-7 17-4-3 6-11 8-17 4Z" fill="#5F8A4B"/>
+  <path d="M30 111v10" stroke="#5F8A4B" stroke-width="1.8"/>
+  <path d="M17 66c6-6 16-8 24-5" stroke="#37628F" stroke-width="5" fill="none" stroke-linecap="round" opacity=".6"/>
+</symbol>
+
+<symbol id="m-vase" viewBox="0 0 132 156">
+  <g stroke="#5F8A4B" stroke-width="3.4" fill="none" stroke-linecap="round">
+    <path d="M64 88c-4-16-12-26-22-32"/><path d="M68 88c2-14 8-24 16-30"/><path d="M66 90c0-12-1-20-2-28"/>
+  </g>
+  <path d="M40 62c10-4 18 2 20 12-10 3-18-3-20-12Z" fill="url(#gLeafI)"/>
+  <path d="M92 58c-10-3-18 4-19 14 10 2 18-5 19-14Z" fill="url(#gLeafI)"/>
+  <g>
+    <circle cx="40" cy="36" r="19" fill="url(#gBloom)"/><circle cx="40" cy="36" r="11" fill="#F6BCCB"/><circle cx="40" cy="36" r="4.5" fill="#DE7E9A"/>
+    <circle cx="84" cy="28" r="17" fill="url(#gBloom)"/><circle cx="84" cy="28" r="10" fill="#F6BCCB"/><circle cx="84" cy="28" r="4" fill="#DE7E9A"/>
+    <circle cx="63" cy="58" r="15" fill="url(#gBloom)"/><circle cx="63" cy="58" r="8.5" fill="#F6BCCB"/><circle cx="63" cy="58" r="3.6" fill="#DE7E9A"/>
+  </g>
+  <path d="M41 92c0-8 9-12 25-12s25 4 25 12l-5 52c-1 7-9 10-20 10s-19-3-20-10Z" fill="#F7FAFD" stroke="#7FAED9" stroke-width="2.4"/>
+  <g fill="#37628F" opacity=".85">
+    <path d="M56 108c4-5 9-6 13-3-3 5-9 6-13 3Z"/><path d="M74 118c-4-5-9-6-13-3 3 5 9 6 13 3Z"/>
+    <circle cx="52" cy="126" r="2.6"/><circle cx="80" cy="106" r="2.6"/><circle cx="66" cy="134" r="2.6"/>
+  </g>
+</symbol>
+
+<symbol id="m-olive" viewBox="0 0 132 62">
+  <path d="M4 46C34 40 78 26 128 10" stroke="#5F8A4B" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M30 40c8-12 22-14 30-8-8 11-22 14-30 8Z" fill="url(#gLeafI)"/>
+  <path d="M62 28c10-11 24-11 31-4-9 10-23 11-31 4Z" fill="url(#gLeafI)"/>
+  <path d="M96 18c9-10 22-11 30-5-9 10-22 12-30 5Z" fill="url(#gLeafI)"/>
+  <ellipse cx="24" cy="30" rx="9" ry="11" fill="#6E8B4F" transform="rotate(-14 24 30)"/>
+  <ellipse cx="52" cy="18" rx="8" ry="10" fill="#84A05F" transform="rotate(-14 52 18)"/>
+  <ellipse cx="82" cy="44" rx="8.5" ry="10.5" fill="#6E8B4F" transform="rotate(-14 82 44)"/>
+</symbol>
+
+<symbol id="m-shell" viewBox="0 0 100 100">
+  <path d="M50 95C19 95 5 63 9 35 11 20 29 10 50 10s39 10 41 25c4 28-10 60-41 60Z" fill="currentColor" opacity=".28"/>
+  <g stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" opacity=".85">
+    <path d="M50 92V16"/><path d="M50 92 27 22"/><path d="M50 92 73 22"/><path d="M50 92 13 34"/><path d="M50 92 87 34"/>
+  </g>
+  <path d="M50 10c-7 0-13 3-13 7h26c0-4-6-7-13-7Z" fill="currentColor" opacity=".7"/>
+</symbol>
+
+<symbol id="m-starfish" viewBox="0 0 110 110">
+  <path d="M55 7q7 27 11.2 32.6Q84 38 100.6 40.2 80 54 73.1 60.9 80 80 83.2 93.8 66 78 55 74 44 78 26.8 93.8 30 80 36.9 60.9 30 54 9.4 40.2 26 38 43.8 39.6 48 34 55 7Z" fill="currentColor"/>
+  <g fill="#fff" opacity=".5"><circle cx="55" cy="44" r="3"/><circle cx="46" cy="56" r="2.6"/><circle cx="64" cy="56" r="2.6"/><circle cx="55" cy="66" r="2.4"/></g>
+</symbol>
+<defs>
+  <radialGradient id="gHib" cx=".5" cy=".9" r=".95">
+    <stop offset="0" stop-color="#FBD79E"/><stop offset=".42" stop-color="#F58F73"/><stop offset="1" stop-color="#E4536F"/></radialGradient>
+  <radialGradient id="gHib2" cx=".5" cy=".9" r=".95">
+    <stop offset="0" stop-color="#FCE3B4"/><stop offset=".45" stop-color="#F6A45C"/><stop offset="1" stop-color="#EE7B4C"/></radialGradient>
+  <radialGradient id="gPlum" cx=".5" cy=".85" r=".9">
+    <stop offset="0" stop-color="#FCEBC8"/><stop offset=".6" stop-color="#FBD3D8"/><stop offset="1" stop-color="#F0A5BE"/></radialGradient>
+  <linearGradient id="gPalm" x1="0" y1="1" x2="1" y2="0">
+    <stop offset="0" stop-color="#356B47"/><stop offset="1" stop-color="#63A06B"/></linearGradient>
+  <radialGradient id="gCoco" cx=".35" cy=".3" r=".85">
+    <stop offset="0" stop-color="#A9714A"/><stop offset="1" stop-color="#6F4227"/></radialGradient>
+  <linearGradient id="gSea" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#F7C24E"/><stop offset="1" stop-color="#EE7B4C"/></linearGradient>
+  <linearGradient id="gShell2" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#8A6A4A"/><stop offset=".5" stop-color="#B07F4F"/><stop offset="1" stop-color="#7C5233"/></linearGradient>
+  <path id="pl" d="M0 0C4-18 16-30 32-36 26-18 16-6 0 0Z"/>
+</defs>
+
+<defs>
+  <linearGradient id="gLeafH" x1="0" y1="1" x2="1" y2="0">
+    <stop offset="0" stop-color="#4E8C5B"/><stop offset="1" stop-color="#79AE72"/></linearGradient>
+  <linearGradient id="gHibP" x1=".5" y1="1" x2=".5" y2="0">
+    <stop offset="0" stop-color="#F79A62"/><stop offset="1" stop-color="#EE6E82"/></linearGradient>
+  <linearGradient id="gHibO" x1=".5" y1="1" x2=".5" y2="0">
+    <stop offset="0" stop-color="#FBC178"/><stop offset="1" stop-color="#F4834F"/></linearGradient>
+  <linearGradient id="gPlumP" x1=".5" y1="1" x2=".5" y2="0">
+    <stop offset="0" stop-color="#FDEDD6"/><stop offset="1" stop-color="#F2A9C0"/></linearGradient>
+  <path id="pl2" d="M0 0C12-9 26-20 39-31 29-15 16-5 3 3Z"/>
+</defs>
+
+<symbol id="m-hibiscus" viewBox="0 0 132 132">
+  <g>
+    <g transform="rotate(0 62 64)"><path d="M62 66C48 60 40 48 40 36 40 25 48 17 57 18 63 18 67 22 69 27 73 23 79 25 80 32 82 44 75 58 62 66Z" fill="url(#gHibP)"/></g>
+    <g transform="rotate(72 62 64)"><path d="M62 66C48 60 40 48 40 36 40 25 48 17 57 18 63 18 67 22 69 27 73 23 79 25 80 32 82 44 75 58 62 66Z" fill="url(#gHibO)"/></g>
+    <g transform="rotate(144 62 64)"><path d="M62 66C48 60 40 48 40 36 40 25 48 17 57 18 63 18 67 22 69 27 73 23 79 25 80 32 82 44 75 58 62 66Z" fill="url(#gHibP)"/></g>
+    <g transform="rotate(216 62 64)"><path d="M62 66C48 60 40 48 40 36 40 25 48 17 57 18 63 18 67 22 69 27 73 23 79 25 80 32 82 44 75 58 62 66Z" fill="url(#gHibO)"/></g>
+    <g transform="rotate(288 62 64)"><path d="M62 66C48 60 40 48 40 36 40 25 48 17 57 18 63 18 67 22 69 27 73 23 79 25 80 32 82 44 75 58 62 66Z" fill="url(#gHibP)"/></g>
+  </g>
+  <g stroke="#fff" stroke-width="1.6" opacity=".5" fill="none" stroke-linecap="round">
+    <path d="M62 62 57 26"/><path d="M62 62 42 38"/><path d="M62 62 82 38"/><path d="M62 62 74 84"/><path d="M62 62 44 80"/>
+  </g>
+  <circle cx="62" cy="64" r="7.5" fill="#EE6E82" opacity=".55"/>
+  <path d="M62 64C73 73 82 81 89 94" stroke="url(#gSea)" stroke-width="3.4" fill="none" stroke-linecap="round"/>
+  <g fill="#F7C24E"><circle cx="86" cy="90" r="2.8"/><circle cx="80" cy="83" r="2.5"/><circle cx="91" cy="97" r="2.5"/></g>
+  <circle cx="94" cy="102" r="4.2" fill="#EE6E82"/>
+</symbol>
+
+<symbol id="m-plumeria" viewBox="0 0 110 110">
+  <g>
+    <g transform="rotate(0 55 55)"><path d="M55 58C45 53 40 42 44 32 47 24 57 22 62 28 68 36 65 50 55 58Z" fill="url(#gPlumP)"/></g>
+    <g transform="rotate(72 55 55)"><path d="M55 58C45 53 40 42 44 32 47 24 57 22 62 28 68 36 65 50 55 58Z" fill="url(#gPlumP)"/></g>
+    <g transform="rotate(144 55 55)"><path d="M55 58C45 53 40 42 44 32 47 24 57 22 62 28 68 36 65 50 55 58Z" fill="url(#gPlumP)"/></g>
+    <g transform="rotate(216 55 55)"><path d="M55 58C45 53 40 42 44 32 47 24 57 22 62 28 68 36 65 50 55 58Z" fill="url(#gPlumP)"/></g>
+    <g transform="rotate(288 55 55)"><path d="M55 58C45 53 40 42 44 32 47 24 57 22 62 28 68 36 65 50 55 58Z" fill="url(#gPlumP)"/></g>
+  </g>
+  <circle cx="55" cy="55" r="8.5" fill="#F9D374" opacity=".9"/>
+  <circle cx="55" cy="55" r="3.6" fill="#F2AE43"/>
+</symbol>
+
+<symbol id="m-monstera" viewBox="0 0 140 140">
+  <defs>
+    <path id="lobe" d="M0-11C22-15 44-11 54 0 44 11 22 15 0 11Z"/>
+  </defs>
+  <g fill="url(#gLeafH)">
+    <g transform="translate(70 96)">
+      <g transform="rotate(12)"><use href="#lobe"/></g>
+      <g transform="translate(0 -18) rotate(-8) scale(1.05)"><use href="#lobe"/></g>
+      <g transform="translate(0 -34) rotate(-28) scale(.98)"><use href="#lobe"/></g>
+      <g transform="translate(0 -48) rotate(-48) scale(.84)"><use href="#lobe"/></g>
+      <g transform="translate(0 -58) rotate(-70) scale(.62)"><use href="#lobe"/></g>
+      <g transform="translate(0 -64) rotate(-88) scale(.46)"><use href="#lobe"/></g>
+      <g transform="scale(-1 1)">
+        <g transform="rotate(12)"><use href="#lobe"/></g>
+        <g transform="translate(0 -18) rotate(-8) scale(1.05)"><use href="#lobe"/></g>
+        <g transform="translate(0 -34) rotate(-28) scale(.98)"><use href="#lobe"/></g>
+        <g transform="translate(0 -48) rotate(-48) scale(.84)"><use href="#lobe"/></g>
+        <g transform="translate(0 -58) rotate(-70) scale(.62)"><use href="#lobe"/></g>
+        <g transform="translate(0 -64) rotate(-88) scale(.46)"><use href="#lobe"/></g>
+      </g>
+    </g>
+  </g>
+  <path d="M70 96C70 112 68 126 64 138" stroke="#37704A" stroke-width="4.4" fill="none" stroke-linecap="round"/>
+  <path d="M70 96 70 34" stroke="#2F6440" stroke-width="2.6" fill="none" stroke-linecap="round" opacity=".5"/>
+</symbol>
+
+<symbol id="m-frond" viewBox="0 0 152 96">
+  <g fill="url(#gLeafH)">
+    <g transform="translate(10 86) rotate(-22) scale(.52)"><use href="#pl2"/></g>
+    <g transform="translate(19 82) rotate(-18) scale(.62)"><use href="#pl2"/></g>
+    <g transform="translate(28 77) rotate(-14) scale(.72)"><use href="#pl2"/></g>
+    <g transform="translate(37 73) rotate(-12) scale(.79)"><use href="#pl2"/></g>
+    <g transform="translate(46 68) rotate(-9) scale(.86)"><use href="#pl2"/></g>
+    <g transform="translate(55 63) rotate(-6) scale(.92)"><use href="#pl2"/></g>
+    <g transform="translate(64 58) rotate(-4) scale(.97)"><use href="#pl2"/></g>
+    <g transform="translate(73 52) rotate(-1)"><use href="#pl2"/></g>
+    <g transform="translate(82 47) rotate(3) scale(.98)"><use href="#pl2"/></g>
+    <g transform="translate(91 42) rotate(7) scale(.93)"><use href="#pl2"/></g>
+    <g transform="translate(100 37) rotate(11) scale(.87)"><use href="#pl2"/></g>
+    <g transform="translate(109 32) rotate(15) scale(.78)"><use href="#pl2"/></g>
+    <g transform="translate(117 27) rotate(20) scale(.67)"><use href="#pl2"/></g>
+    <g transform="translate(125 21) rotate(25) scale(.54)"><use href="#pl2"/></g>
+    <g transform="translate(133 16) rotate(30) scale(.40)"><use href="#pl2"/></g>
+  </g>
+  <g fill="#3F7A52" opacity=".92">
+    <g transform="translate(22 82) scale(1 -1) rotate(-14) scale(.40)"><use href="#pl2"/></g>
+    <g transform="translate(33 76) scale(1 -1) rotate(-10) scale(.48)"><use href="#pl2"/></g>
+    <g transform="translate(44 71) scale(1 -1) rotate(-8) scale(.54)"><use href="#pl2"/></g>
+    <g transform="translate(55 65) scale(1 -1) rotate(-5) scale(.60)"><use href="#pl2"/></g>
+    <g transform="translate(66 59) scale(1 -1) rotate(-2) scale(.64)"><use href="#pl2"/></g>
+    <g transform="translate(77 53) scale(1 -1) rotate(1) scale(.65)"><use href="#pl2"/></g>
+    <g transform="translate(88 48) scale(1 -1) rotate(5) scale(.62)"><use href="#pl2"/></g>
+    <g transform="translate(99 42) scale(1 -1) rotate(9) scale(.56)"><use href="#pl2"/></g>
+    <g transform="translate(109 36) scale(1 -1) rotate(14) scale(.47)"><use href="#pl2"/></g>
+    <g transform="translate(119 29) scale(1 -1) rotate(19) scale(.37)"><use href="#pl2"/></g>
+    <g transform="translate(127 23) scale(1 -1) rotate(24) scale(.27)"><use href="#pl2"/></g>
+  </g>
+  <path d="M4 90C40 86 100 58 146 10" stroke="#37704A" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+</symbol>
+
+<symbol id="m-coconut" viewBox="0 0 148 96">
+  <circle cx="40" cy="52" r="36" fill="#7A4A2E"/>
+  <circle cx="46" cy="50" r="28" fill="#FFFAF2"/>
+  <circle cx="46" cy="50" r="28" fill="none" stroke="#C99165" stroke-width="2.5" opacity=".5"/>
+  <ellipse cx="49" cy="48" rx="15" ry="17" fill="#F4E7D6" opacity=".65"/>
+  <circle cx="110" cy="60" r="27" fill="url(#gCoco)"/>
+  <g fill="#4E2C17" opacity=".6"><circle cx="103" cy="51" r="3.2"/><circle cx="117" cy="54" r="3.2"/><circle cx="110" cy="64" r="2.8"/></g>
+  <path d="M92 47c5-7 13-11 21-11" stroke="#C99165" stroke-width="4.5" fill="none" stroke-linecap="round" opacity=".5"/>
+</symbol>
+
+<symbol id="m-seahorse" viewBox="0 0 92 136">
+  <path d="M50 42C58 52 55 64 46 70" stroke="url(#gSea)" stroke-width="13" fill="none" stroke-linecap="round"/>
+  <path d="M46 70C36 76 34 86 40 94" stroke="url(#gSea)" stroke-width="12" fill="none" stroke-linecap="round"/>
+  <path d="M40 94C47 102 45 112 36 115C30 117 29 123 35 124C41 125 47 120 46 113" stroke="url(#gSea)" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <ellipse cx="46" cy="30" rx="13" ry="12" fill="url(#gSea)"/>
+  <path d="M35 26 15 31 34 37Z" fill="url(#gSea)"/>
+  <g fill="#EE9A4A">
+    <path d="M57 22c4-6 9-6 11-1-4 3-8 3-11 1Z"/>
+    <path d="M58 48c7-2 11 2 9 7-6 0-9-3-9-7Z"/>
+    <path d="M52 78c7-2 11 2 9 7-6 0-9-3-9-7Z"/>
+  </g>
+  <circle cx="48" cy="26" r="3.2" fill="#8A4A22"/>
+</symbol>
+
+<symbol id="m-turtle" viewBox="0 0 148 122">
+  <g fill="#9A6B44">
+    <path d="M26 34c-10-8-22-6-24 4-2 9 8 16 20 14Z"/><path d="M22 88c-11 5-16 16-9 22 7 6 18 0 22-10Z"/>
+    <path d="M118 30c9-9 22-9 25 1 2 9-8 15-19 14Z"/><path d="M120 92c10 4 16 15 9 21-7 6-17 1-21-9Z"/>
+  </g>
+  <ellipse cx="132" cy="46" rx="15" ry="12" fill="#A5734A" transform="rotate(-16 132 46)"/>
+  <circle cx="139" cy="41" r="2.8" fill="#3B2414"/>
+  <ellipse cx="70" cy="61" rx="46" ry="37" fill="url(#gShell2)"/>
+  <g fill="#7A5232" opacity=".55">
+    <path d="M70 30c9 0 15 6 15 14s-6 14-15 14-15-6-15-14 6-14 15-14Z"/>
+    <path d="M70 62c9 0 15 6 15 14s-6 14-15 14-15-6-15-14 6-14 15-14Z"/>
+  </g>
+  <g stroke="#5E3D24" stroke-width="2.4" fill="none" opacity=".5">
+    <path d="M34 36c6 8 8 16 8 25s-2 17-8 25"/><path d="M106 36c-6 8-8 16-8 25s2 17 8 25"/>
+    <ellipse cx="70" cy="61" rx="36" ry="28"/>
+  </g>
+</symbol>
+</svg>
+<nav class="nav">
+  <div class="nav-in">
+    <button class="tabbtn active" data-view="itinerary">The Weekend</button>
+    <button class="tabbtn" data-view="groningen">Things to Do</button>
+    <button class="tabbtn" data-view="packing">What to Bring</button>
+  </div>
+</nav>
+
+<div class="view active" id="view-itinerary">
+
+  <header class="hero">
+    <div class="trim"></div>
+    <div class="wrap">
+      <h1>
+        <span class="pre">Groningen &amp; Zwolle</span>
+        The Summer<br>I Turned&nbsp;30
+      </h1>
+      <div class="dateline">5 &mdash; 6 September</div>
+      <div class="plate">
+        <svg viewBox="0 0 150 152" style="width:24%"><use href="#m-umbrella"/></svg>
+        <svg viewBox="0 0 132 100" style="width:11%"><use href="#m-lemon"/></svg>
+        <svg viewBox="0 0 210 142" style="width:28%"><use href="#m-vespa"/></svg>
+        <svg viewBox="0 0 100 148" style="width:13%"><use href="#m-spritz"/></svg>
+      </div>
+    </div>
+  </header>
+
+  <section class="sec riviera" style="padding-bottom:140px">
+    <div class="stage">
+      <svg class="deco" viewBox="0 0 100 100" style="width:124px;top:-30px;right:-58px;opacity:.18"><use href="#m-lemon-half"/></svg>
+      <svg class="deco" viewBox="0 0 132 156" style="width:104px;bottom:-26px;right:16px;opacity:.9"><use href="#m-vase"/></svg>
+    </div>
+
+    <div class="wrap">
+      <div class="head">
+        <div class="rule">
+          <span class="label">Day One</span>
+          <span class="label">Saturday, 5 September</span>
+        </div>
+        <h2 class="display">Ciao, 20s</h2>
+      </div>
+
+      <button class="jump" data-goto="groningen">
+        <svg class="mk" viewBox="0 0 132 100" style="width:42px"><use href="#m-lemon"/></svg>
+        <span>
+          <span class="jl">Arriving early?</span>
+          <span class="jh">An afternoon&rsquo;s worth of Groningen</span>
+        </span>
+        <svg class="arw" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+
+      <ol class="rows">
+        <li class="row">
+          <div class="when">18.00</div>
+          <div>
+            <h3>Birthday dinner</h3>
+            <p class="venue">Yip Asian Bar &amp; Restaurant, Groningen</p>
+            <a class="map" href="https://www.google.com/maps/place/Yip+Asian+Bar+%26+Restaurant/@53.2069926,6.5818156,15z/data=!3m1!4b1!4m6!3m5!1s0x47c82d0a7b1ddfb1:0x20be78c1a83e44dc!8m2!3d53.206993!4d6.5920939!16s%2Fg%2F11h0mbdyr0" target="_blank" rel="noopener">Google Maps &rarr;</a>
+          </div>
+        </li>
+        <li class="row">
+          <div class="when">Late</div>
+          <div>
+            <h3>Somewhere to sleep</h3>
+            <p>Stay over at my parents&rsquo; place, or at your own accommodation if you prefer.</p>
+            <p class="meta">Address shared separately</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="interlude">
+    <div class="wrap">
+      <div class="horizon" aria-hidden="true">
+        <svg viewBox="0 0 132 62" style="width:18%;opacity:.85"><use href="#m-olive"/></svg>
+        <svg viewBox="0 0 100 148" style="width:8%;opacity:.45"><use href="#m-spritz"/></svg>
+        <div class="sunset"><svg viewBox="0 0 100 100"><use href="#m-lemon-half"/></svg></div>
+        <svg viewBox="0 0 152 96" style="width:22%;opacity:.6"><use href="#m-frond"/></svg>
+        <svg viewBox="0 0 110 110" style="width:11%;opacity:.95"><use href="#m-plumeria"/></svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec pacific pacific-type" style="padding-bottom:150px">
+    <div class="trim pacific"></div>
+    <div class="stage">
+      <svg class="deco" viewBox="0 0 140 140" style="width:136px;top:64px;left:-58px;opacity:.26;transform:rotate(-16deg)"><use href="#m-monstera"/></svg>
+      <svg class="deco" viewBox="0 0 110 110" style="width:62px;top:46%;right:-20px;opacity:.5;transform:rotate(12deg)"><use href="#m-plumeria"/></svg>
+      <svg class="deco" viewBox="0 0 148 122" style="width:138px;bottom:-22px;right:10px;opacity:.85"><use href="#m-turtle"/></svg>
+    </div>
+
+    <div class="wrap">
+      <div class="head">
+        <div class="rule">
+          <span class="label">Day Two</span>
+          <span class="label">Sunday, 6 September</span>
+        </div>
+        <h2 class="display">Aloha, 30</h2>
+      </div>
+
+      <ol class="rows">
+        <li class="row">
+          <div class="when">Morning</div>
+          <div>
+            <h3>Breakfast at home</h3>
+            <p>For everyone who stayed over. If you slept elsewhere, you are very welcome to join.</p>
+            <p class="meta">Address shared separately</p>
+          </div>
+        </li>
+        <li class="row">
+          <div class="when">13.00</div>
+          <div>
+            <h3>Lunch</h3>
+            <p class="venue">Minna Foodclub, Groningen</p>
+            <a class="map" href="https://www.google.com/maps/place/Minna+Foodclub/@53.218499,6.5596114,15z/data=!3m1!4b1!4m6!3m5!1s0x47c9cd003602bd6d:0xf36e818b8a799e11!8m2!3d53.2184866!4d6.5698897!16s%2Fg%2F11x_96qyxl" target="_blank" rel="noopener">Google Maps &rarr;</a>
+          </div>
+        </li>
+        <li class="row">
+          <div class="when">15.00</div>
+          <div>
+            <h3>Onwards to Zwolle</h3>
+            <p>We leave Groningen around three. Zwolle sits midway between Groningen and Amsterdam,
+              so it is on the way back home. Join me by public transport &mdash; the direct train takes about an hour.</p>
+          </div>
+        </li>
+        <li class="row">
+          <div class="when">Evening</div>
+          <div>
+            <h3>Leisure &amp; dinner</h3>
+            <p class="venue">Wereldrestaurant Eten &amp; Zo, Zwolle</p>
+            <p>Glow golf, bowling, karaoke and pool are all there, and we can have dinner afterwards.</p>
+            <a class="map" href="https://www.google.com/maps/place/Wereldrestaurant+Eten+%26+Zo/@52.5198871,6.111266,15z/data=!3m2!4b1!5s0x47c7df124ff6cf0b:0x912390a5a66729f9!4m6!3m5!1s0x47c7df1212dee611:0x8f8dc16238366339!8m2!3d52.5198745!4d6.1215443!16s%2Fg%2F11g9q5j__4" target="_blank" rel="noopener">Google Maps &rarr;</a>
+          </div>
+        </li>
+        <li class="row">
+          <div class="when">20.00</div>
+          <div>
+            <h3>Back to Amsterdam</h3>
+            <p>I travel home by public transport, so you are welcome to join me.
+              The direct train from Zwolle takes just over an hour.</p>
+          </div>
+        </li>
+      </ol>
+
+      <button class="jump" data-goto="packing">
+        <svg class="mk" viewBox="0 0 132 132" style="width:42px"><use href="#m-hibiscus"/></svg>
+        <span>
+          <span class="jl">Before you leave home</span>
+          <span class="jh">A very short packing list</span>
+        </span>
+        <svg class="arw" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <div class="trim"></div>
+</div>
+
+<div class="view" id="view-groningen">
+  <section class="sec riviera" style="padding-bottom:150px">
+    <div class="trim"></div>
+    <div class="stage">
+      <svg class="deco" viewBox="0 0 100 100" style="width:120px;top:-4px;right:-70px;opacity:.16"><use href="#m-lemon-half"/></svg>
+      <svg class="deco" viewBox="0 0 210 142" style="width:150px;bottom:14px;right:-38px;opacity:.5"><use href="#m-vespa"/></svg>
+    </div>
+
+    <div class="wrap">
+      <div class="subhead">
+        <p class="label">Day One, earlier</p>
+        <h1 class="display">Things to do<br>in Groningen</h1>
+        <div class="plate" style="margin-top:38px">
+          <svg viewBox="0 0 132 62" style="width:26%"><use href="#m-olive"/></svg>
+          <svg viewBox="0 0 132 156" style="width:20%"><use href="#m-vase"/></svg>
+          <svg viewBox="0 0 132 100" style="width:13%"><use href="#m-lemon"/></svg>
+        </div>
+      </div>
+
+      <ol class="rows">
+        <li class="row">
+          <div class="num">01</div>
+          <div>
+            <h3>Klimcentrum Bjoeks</h3>
+            <p>An outdoor climbing wall of 37 metres, once the tallest in the world.</p>
+            <a class="map" href="https://www.google.com/maps/place/Klimcentrum+Bjoeks/@53.2405944,6.5908837,15z/data=!3m1!4b1!4m6!3m5!1s0x47c9d28e1e5d2943:0x8dbba075b6213655!8m2!3d53.240582!4d6.601162!16s%2Fg%2F1tfrr4x5" target="_blank" rel="noopener">Google Maps &rarr;</a>
+          </div>
+        </li>
+        <li class="row">
+          <div class="num">02</div>
+          <div>
+            <h3>Martinitoren</h3>
+            <p>Climb the bell tower on the Grote Markt for the widest view over the city.</p>
+            <a class="map" href="https://www.google.com/maps/place/Martinitoren/@53.2193823,6.5579443,15z/data=!3m1!4b1!4m6!3m5!1s0x47c9cd50b7d9bbc3:0xe25a0f6b9b675895!8m2!3d53.2193699!4d6.5682226!16s%2Fg%2F1tdbv_kt" target="_blank" rel="noopener">Google Maps &rarr;</a>
+          </div>
+        </li>
+        <li class="row">
+          <div class="num">03</div>
+          <div>
+            <h3>Groninger Forum &amp; rooftop</h3>
+            <p>Take the escalators up through the building to the roof terrace, which is free to visit.</p>
+            <a class="map" href="https://www.google.com/maps/search/?api=1&amp;query=Groninger+Forum%2C+Groningen" target="_blank" rel="noopener">Google Maps &rarr;</a>
+          </div>
+        </li>
+        <li class="row">
+          <div class="num">04</div>
+          <div>
+            <h3>Grote Markt &amp; the old centre</h3>
+            <p>The main square and the shopping streets around it, with plenty of terraces.</p>
+            <a class="map" href="https://www.google.com/maps/place/Grote+Markt,+Groningen/@53.2191516,6.5574326,15z/data=!3m1!4b1!4m6!3m5!1s0x47c9cd51b8c976ed:0x27e4abadeda54afb!8m2!3d53.2189617!4d6.5679106!16s%2Fg%2F1tf_s3q0" target="_blank" rel="noopener">Google Maps &rarr;</a>
+          </div>
+        </li>
+      </ol>
+
+      <button class="jump back" data-goto="itinerary">
+        <svg class="arw" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 12H5m6-6-6 6 6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="jh">Back to the weekend</span>
+      </button>
+    </div>
+  </section>
+  <div class="trim"></div>
+</div>
+
+<div class="view" id="view-packing">
+  <section class="sec pacific pacific-type" style="padding-bottom:150px">
+    <div class="trim pacific"></div>
+    <div class="stage">
+      <svg class="deco" viewBox="0 0 132 132" style="width:92px;bottom:34px;right:-22px;opacity:.7;transform:rotate(10deg)"><use href="#m-hibiscus"/></svg>
+    </div>
+
+    <div class="wrap">
+      <div class="subhead">
+        <p class="label">Day Two, and the night before</p>
+        <h1 class="display">What to Bring</h1>
+        <p class="lede centred" style="margin-top:16px;max-width:22em">
+          Almost nothing &mdash; unless you are sleeping at my parents&rsquo;.
+        </p>
+        <div class="plate" style="margin-top:38px">
+          <svg viewBox="0 0 152 96" style="width:26%"><use href="#m-frond"/></svg>
+          <svg viewBox="0 0 110 110" style="width:13%"><use href="#m-plumeria"/></svg>
+          <svg viewBox="0 0 140 140" style="width:18%"><use href="#m-monstera"/></svg>
+        </div>
+      </div>
+
+      <ol class="rows">
+        <li class="row">
+          <div class="num">01</div>
+          <div>
+            <h3>A sleeping mat</h3>
+            <p>Anything between you and the floor: airbed, roll mat, camping mattress.</p>
+          </div>
+        </li>
+        <li class="row">
+          <div class="num">02</div>
+          <div>
+            <h3>A sleeping bag</h3>
+            <p>Or a duvet, if that is easier to bring.</p>
+          </div>
+        </li>
+        <li class="row">
+          <div class="num">03</div>
+          <div>
+            <h3>Whatever else makes you comfortable</h3>
+            <p>Your pillow, an eye mask, earplugs.</p>
+          </div>
+        </li>
+      </ol>
+
+      <button class="jump back" data-goto="itinerary">
+        <svg class="arw" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 12H5m6-6-6 6 6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="jh">Back to the weekend</span>
+      </button>
+    </div>
+  </section>
+  <div class="trim"></div>
+</div>
+<script>
+function show(view){
+  document.querySelectorAll('.tabbtn').forEach(x=>x.classList.toggle('active',x.dataset.view===view));
+  document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id==='view-'+view));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('.tabbtn').forEach(b=>b.addEventListener('click',()=>show(b.dataset.view)));
+document.querySelectorAll('[data-goto]').forEach(b=>b.addEventListener('click',()=>show(b.dataset.goto)));
+</script>
+</body>
+</html>
